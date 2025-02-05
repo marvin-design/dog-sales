@@ -11,7 +11,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const maxPrice =
       parseInt(document.querySelector("#max-price").value) || Infinity;
 
-    let chosenAnimal = null;
+    let chosenAnimal = false;
+    let noResultMessage = document.querySelector("#no-result-message");
+
+    // Remove previous no-result message if any
+    if (noResultMessage) {
+      noResultMessage.remove();
+    }
 
     dogCards.forEach((card) => {
       const cardLocation = card
@@ -30,17 +36,15 @@ document.addEventListener("DOMContentLoaded", function () {
       const breedMatch = !breed || cardBreed.includes(breed);
       const priceMatch = cardPrice >= minPrice && cardPrice <= maxPrice;
 
-      if (locationMatch && breedMatch && priceMatch && !chosenAnimal) {
+      if (locationMatch && breedMatch && priceMatch) {
         card.style.display = "block";
-        chosenAnimal = card; // Choose the first matching animal
+        chosenAnimal = true;
       } else {
         card.style.display = "none";
       }
     });
 
     // Display message if no dogs match
-    const noResultMessage = document.querySelector("#no-result-message");
-
     if (!chosenAnimal) {
       if (!noResultMessage) {
         const message = document.createElement("p");
@@ -49,8 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
         message.style.color = "red";
         form.appendChild(message);
       }
-    } else if (noResultMessage) {
-      noResultMessage.remove();
     }
   });
 });
