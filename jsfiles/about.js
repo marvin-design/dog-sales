@@ -1,18 +1,18 @@
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  display: none;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-.scroll-to-top:hover {
-  background-color: #45a049;
-}
+// Show/hide the button based on scroll position
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    scrollToTopBtn.classList.add("show"); // Add the 'show' class
+  } else {
+    scrollToTopBtn.classList.remove("show"); // Remove the 'show' class
+  }
+});
+
+// Smooth scroll to top when the button is clicked
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
